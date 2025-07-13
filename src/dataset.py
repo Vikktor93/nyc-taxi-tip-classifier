@@ -1,22 +1,31 @@
 import pandas as pd
+import os
+
+# Ruta por defecto al dataset local
+DEFAULT_DATA_PATH = os.path.join(
+    os.getcwd(), 'data', 'raw', 'yellow_tripdata_2020-01.parquet'
+)
 
 # Carga y limpieza de datos
-def load_data(path: str) -> pd.DataFrame:
+def load_data(path: str = None) -> pd.DataFrame:
+
+    # Si no se pasa path, se usa el archivo por defecto
+    if path is None:
+        path = DEFAULT_DATA_PATH
+
     # Carga de datos
-    path = 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2020-01.parquet'
     df = pd.read_parquet(path)
 
-    # Se elimina los registros con valores nulos en columnas clave
-    df = df.dropna(subset=['tip_amount', 'total_amount', 'pickup_datetime', 'payment_type'])
+    # Eliminar registros con nulos en columnas clave
+    df = df.dropna(subset=['tip_amount', 'total_amount', 'tpep_pickup_datetime', 'payment_type'])
 
-    # Creación del porcentaje de propina
+    # Crear porcentaje de propina
     df['tip_pct'] = df['tip_amount'] / df['total_amount']
 
-    # Se define la variable objetivo: 1 si propina > 20%, sino 0
+    # Variable objetivo: 1 si propina > 20%, sino 0
     df['y'] = (df['tip_pct'] > 0.2).astype(int)
 
-    # Se convierte pickup_datetime a datetime si no lo está
-    if not pd.api.types.is_datetime64_any_dtype(df['pickup_datetime']):
-        df['pickup_datetime'] = pd.to_datetime(df['pickup_datetime'])
+    # Asegurar tipo datetime
+    df['pickup_datetime'] = pd.to_datetime(df['tpep_pickup_datetime'])
 
     return df

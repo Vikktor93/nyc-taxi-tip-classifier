@@ -14,24 +14,31 @@ Repositorio que implementa un pipeline de Ciencia de Datos para clasificar viaje
 
 ```
 Tarea-1/
+├── assets/
+│   └── banner-nyc.png
 ├── data/
-│ └── raw/
-│ ├── yellow_tripdata_2020-01.parquet
-│ └── yellow_tripdata_2020-02.parquet
+│   ├── processed/
+│   └── raw/
+│       ├── yellow_tripdata_2020-01.parquet
+│       ├── yellow_tripdata_2020-02.parquet
+│       └── yellow_tripdata_2020-03.parquet
 ├── models/
-│ └── random_forest_taxi_tip.joblib
+│   └── random_forest_taxi_tip.joblib
+├── notebooks/
+│   └── nyc_taxi_tip_classifier.ipynb
 ├── reports/
-│ ├── metrics.csv
-│ └── figures/
+│   ├── metrics.csv
+│   └── figures/
 ├── src/
-│ ├── init.py
-│ ├── dataset.py
-│ ├── build_features.py
-│ ├── train.py
-│ ├── predict.py
-│ ├── evaluate_monthly.py
-│ └── plots.py
-└── README.md
+│   ├── __init__.py
+│   ├── dataset.py
+│   ├── build_features.py
+│   ├── train.py
+│   ├── predict.py
+│   ├── evaluate_monthly.py
+│   └── plots.py
+├── README.md
+└── requirements.txt
 
 ```
 

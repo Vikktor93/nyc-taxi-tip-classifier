@@ -16,7 +16,7 @@ def create_features(df: pd.DataFrame) -> pd.DataFrame:
         data['distance'] = data['trip_distance']
 
     # One-hot encoding de payment_type
-    encoder = OneHotEncoder(sparse=False, drop='first')
+    encoder = OneHotEncoder(sparse_output=False, drop='first')
     ohe = encoder.fit_transform(data[['payment_type']])
     ohe_cols = encoder.get_feature_names_out(['payment_type'])
     df_ohe = pd.DataFrame(ohe, columns=ohe_cols, index=data.index)

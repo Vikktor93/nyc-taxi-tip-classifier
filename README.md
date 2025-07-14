@@ -6,12 +6,11 @@
 <img src="./assets/banner-nyc.png"/>
 
 ## **Tarea 1: Reestructuración y Evaluación de Modelo de Machine Learning**
-
-## NYC Taxi Tip Classifier
+### **NYC Taxi Tip Classifier**
 
 Repositorio que implementa un pipeline de Ciencia de Datos para clasificar viajes de taxi en NYC según si la propina es alta (>20%) o no.
 
-## Estructura del proyecto
+### Estructura del proyecto
 
 ```
 Tarea-1/
@@ -36,7 +35,7 @@ Tarea-1/
 
 ```
 
-## Requisitos
+### Requisitos
 
 - Python 3.10+  
 - Conda o entorno virtual con las librerías:
@@ -45,7 +44,7 @@ Tarea-1/
   - joblib  
   - matplotlib  
 
-## Instrucciones de instalación
+### Instrucciones de instalación
 
 1. Clona este repositorio:  
    ```bash
@@ -60,7 +59,7 @@ Tarea-1/
     pip install -r requirements.txt
     ```
 
-## Uso
+### Uso
 1. Entrenamiento:
     ```bash
     python -m src.train data\raw\yellow_tripdata_2020-01.parquet models\random_forest_taxi_tip.joblib --sample_size 100000 --test_size 0.2
@@ -79,14 +78,22 @@ Tarea-1/
     python -m src.plots reports\metrics.csv --out reports\figures\f1_monthly.png
     ```
 
-## Tabla de Resultados Mensuales
+### Tabla de Resultados Mensuales
 
-| Mes     | Cantidad de ejemplos | F1-score |
-| ------- | -------------------- | -------- |
-| 2020-01 | 100 000 (muestra)    | 0.0329   |
-| 2020-02 | 100 000 (muestra)    | 0.0293   |
-| 2020-03 | 100 000 (muestra)    | 0.0368   |
+| Mes     | Muestra | F1-score |
+| ------- | ------- | -------- |
+| 2020-01 | 100 000 | 0.0329   |
+| 2020-02 | 100 000 | 0.0293   |
+| 2020-03 | 100 000 | 0.0368   |
 
 Para evaluar con datos completos, elimina  ```--sample_size ``` y ajusta la tabla con el número real de registros.
 
 
+### Conclusiones
+1. El F1-score es muy bajo (< 0.05) en los meses evaluados y muestra ligeras variaciones (0.0329 vs. 0.0293), lo que indica que el modelo tiene un desempeño limitado para la clase minoritaria (propinas altas).
+2. Algunos factores que puedan explicar esta variación:
+    - Existe un desbalance de clases, ya que la proporción de viajes con propinas altas es muy baja (< 5%).
+    - Cambio estacional a principios de 2020, la pandemia de COVID-19 provocó restricciones de movilidad y alteró drásticamente los patrones de uso de taxis y propinas. Esto pudo impactar tanto en el volumen de viajes como en el comportamiento de propina en distintos meses.
+3. Analizando los resultados se puede recomendar lo siguiente:
+    - Para manejar el desbalance se puede utilizar undersampling o emplear SMOTE.
+    - Incluir algunos indicadores de restricciones como por ejemplo, niveles de confinamiento o movilidad, para capturar el efecto de la pandemia en el comportamiento de propina.

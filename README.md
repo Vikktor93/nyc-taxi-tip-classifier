@@ -38,7 +38,8 @@ Tarea-1/
 ### Requisitos
 
 - Python 3.10+  
-- Conda o entorno virtual con las librerías:
+- VS Code o su editor favorito
+- Anaconda o el entorno virtual de su preferencia con las siguientes librerías:
   - pandas  
   - scikit-learn  
   - joblib  
@@ -73,7 +74,7 @@ Tarea-1/
     ```bash
     python -m src.evaluate_monthly models\random_forest_taxi_tip.joblib data\raw reports\metrics.csv --sample_size 100000
     ```
-4. Generación de gráfica:
+4. Generación de gráficos:
     ```bash
     python -m src.plots reports\metrics.csv --out reports\figures\f1_monthly.png
     ```
